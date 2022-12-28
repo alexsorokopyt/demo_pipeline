@@ -1,0 +1,45 @@
+mappings_path: C:\Excel Mappings.xlsm
+
+source_folder: C:\Source
+backup_folder: C:\Backup
+error_folder: C:\Error
+
+dbt_folder: transform_data
+
+dwh_url: "{{env_var("dwh_driver")}}://{{env_var("dwh_host")}}:{{env_var("dwh_port")}}/{{env_var("dwh_name")}}?trusted_connection=yes&driver=ODBC+Driver+17+for+SQL+Server"
+data_files_type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+email_header: Пример темы письма
+
+sources:
+  source1:
+    file_mask: Report1
+    sheet_name: Sheet1
+    dwh_schema: dbo
+    dwh_table: src_mail__report1
+    email_from: email
+    email_subject: header
+  source2:
+    file_mask: Report2
+    sheet_name: Sheet2
+    dwh_schema: dbo
+    dwh_table: src_mail__report2
+    email_from: email
+    email_subject: header
+
+mappings:
+  mapping1:
+    sheet_name: Справочники
+    excel_table: Table1
+    dwh_schema: dbo
+    dwh_table: src_mapping__table1
+  mapping2:
+    sheet_name: Справочники
+    excel_table: Table2
+    dwh_schema: dbo
+    dwh_table: src_mapping__table2
+  mapping3:
+    sheet_name: Справочники
+    excel_table: Table3
+    dwh_schema: dbo
+    dwh_table: src_mapping__table3

@@ -1,0 +1,131 @@
+mappings_path:
+  type: string
+  is_file_path: True
+  required: True
+  maxlength: 260
+  empty: False
+  file_extension: 
+    - .xlsm
+    - .xlsx
+
+source_folder:
+  type: string
+  is_folder_path: True
+  required: True
+  maxlength: 260
+  empty: False
+
+error_folder:
+  type: string
+  is_folder_path: True
+  required: True
+  maxlength: 260
+  empty: False
+
+backup_folder:
+  type: string
+  is_folder_path: True
+  required: True
+  maxlength: 260
+  empty: False
+
+dwh_url:
+  type: string
+  is_valid_sqlalchemy_url: True
+  required: True
+  empty: False
+
+data_files_type:
+  type: list
+  required: True
+  empty: False
+  valuesrules:
+    type: string
+    required: True
+
+email_header:
+  type: string
+  required: True
+  empty: False
+
+sources:
+  type: dict
+  valuesrules:
+    type: dict
+    required: True
+    schema:
+      file_mask:
+        type: string
+        required: True
+        empty: False
+      sheet_name:
+        type: string
+        required: True
+        empty: False
+      dwh_schema:
+        type: string
+        required: True
+        empty: False
+      dwh_table:
+        type: string
+        required: True
+        empty: False
+      rename:
+        type: dict
+        required: False
+        valuesrules:
+          type: string
+          # regex: ^[a-zA-Z0-9_]*$
+          is_valid_db_column_name: True
+          maxlength: 40
+      convert:
+        type: dict
+        required: False
+        valuesrules:
+          type: string
+          allowed:
+            - int
+            - float
+      email_from:
+        type: string
+        regex: ^[a-z0-9.-]+@[a-z0-9.]+\.[a-z]{2,3}$
+      email_subject:
+        type: string
+        required: True
+        empty: False
+
+mappings:
+  type: dict
+  valuesrules:
+    type: dict
+    required: True
+    schema:
+      excel_table:
+        type: string
+        required: True
+        empty: False
+      sheet_name:
+        type: string
+        required: True
+        empty: False
+      rename:
+        type: dict
+        required: True
+        valuesrules:
+          type: string
+          is_valid_db_column_name: True
+          maxlength: 40
+      dwh_schema:
+        type: string
+        required: True
+        empty: False
+      dwh_table:
+        type: string
+        required: True
+        empty: False
+
+dbt_folder:
+  type: string
+  is_folder_path: True
+  required: True
+  empty: False
